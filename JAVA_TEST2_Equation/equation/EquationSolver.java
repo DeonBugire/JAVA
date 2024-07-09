@@ -31,7 +31,6 @@ public class EquationSolver {
         // Очищаем пробелы и приводим уравнение к стандартному виду
         equation = equation.replaceAll("\\s+", "");
 
-        // Улучшенное регулярное выражение для разбора уравнения
         String regex = "([-+]?\\d*\\.?\\d*)x\\^2([-+]?\\d*\\.?\\d*)x?([-+]?\\d*\\.?\\d*)?=0";
         
         Pattern pattern = Pattern.compile(regex);
