@@ -17,9 +17,6 @@ public class EquationManager {
         this.solver = new EquationSolver();
     }
 
-    /**
-     * Обрабатывает файл с системой уравнений: проверяет наличие, валидность, решает систему уравнений.
-     */
     public void processEquationFile() {
         if (!fileManager.fileExists()) {
             generateAndSolveEquation();
@@ -36,9 +33,6 @@ public class EquationManager {
         }
     }
 
-    /**
-     * Генерирует новую систему уравнений, сохраняет и решает ее.
-     */
     private void generateAndSolveEquation() {
         String equations = generator.generateEquations();
         fileManager.writeFile(equations);
@@ -49,10 +43,7 @@ public class EquationManager {
         writeSolutions(solutions);
     }
 
-    /**
-     * Записывает решения системы уравнений в файл.
-     * @param solutions список решений.
-     */
+
     private void writeSolutions(List<String> solutions) {
         if (solutions == null || solutions.isEmpty()) {
             fileManager.appendToFile("No solutions.\n");
