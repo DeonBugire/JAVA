@@ -6,11 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EquationSolver {
-    /**
-     * Решает систему уравнений.
-     * @param equations строка с системой уравнений.
-     * @return список решений.
-     */
+
     public List<String> solveEquation(String equations) {
         double[][] matrix = parseCoefficients(equations);
 
@@ -31,11 +27,6 @@ public class EquationSolver {
         return solutionStrings;
     }
 
-    /**
-     * Парсит коэффициенты из системы уравнений.
-     * @param equations строка с системой уравнений.
-     * @return матрица коэффициентов.
-     */
     private double[][] parseCoefficients(String equations) {
         String[] lines = equations.split("\\R");
         double[][] matrix = new double[4][4];
@@ -48,7 +39,7 @@ public class EquationSolver {
                 matrix[i][0] = parseCoefficient(matcher.group(1));
                 matrix[i][1] = parseCoefficient(matcher.group(2));
                 matrix[i][2] = parseCoefficient(matcher.group(3));
-                matrix[i][3] = Double.parseDouble(matcher.group(5)) - parseCoefficient(matcher.group(4)); // Переносим свободный член в правую часть
+                matrix[i][3] = Double.parseDouble(matcher.group(5)) - parseCoefficient(matcher.group(4));
             } else {
                 return null; // Если парсинг не удался
             }
@@ -56,11 +47,6 @@ public class EquationSolver {
         return matrix;
     }
 
-    /**
-     * Преобразует строковый коэффициент в число, учитывая случаи с пустыми строками и знаками.
-     * @param coefficient строка с коэффициентом.
-     * @return числовое значение коэффициента.
-     */
     private double parseCoefficient(String coefficient) {
         if (coefficient == null || coefficient.isEmpty()) {
             return 1;
@@ -73,11 +59,6 @@ public class EquationSolver {
         }
     }
 
-    /**
-     * Решает систему уравнений методом Гаусса.
-     * @param matrix матрица коэффициентов.
-     * @return массив решений.
-     */
     private double[] solveGaussian(double[][] matrix) {
         int n = 3; // Размерность системы
         for (int i = 0; i < n; i++) {
