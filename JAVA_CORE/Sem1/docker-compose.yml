@@ -1,0 +1,8 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./docs:/app/docs
+    command: javadoc -sourcepath /app/src -d /app/docs -subpackages ru
