@@ -3,16 +3,16 @@ package ru.gb.oseminar;
 import java.util.List;
 
 public class Market implements MarketBehaviour {
-    private final MarketQueue marketQueue;
+    private final MarketQueue queue;
 
     public Market() {
-        this.marketQueue = new MarketQueue();
+        this.queue = new MarketQueue();
     }
 
     @Override
     public void acceptToMarket(Actor actor) {
         System.out.println(actor.getName() + " пришел в магазин");
-        marketQueue.addActorToQueue(actor);
+        queue.takeInQueue(actor);
     }
 
     @Override
@@ -24,11 +24,8 @@ public class Market implements MarketBehaviour {
 
     @Override
     public void update() {
-        marketQueue.processOrders();
-        marketQueue.deliverOrders();
-        List<Actor> actorsToRelease = marketQueue.releaseActorsFromQueue();
-        if (!actorsToRelease.isEmpty()) {
-            releaseFromMarket(actorsToRelease);
-        }
+        queue.takeOrders();
+        queue.giveOrders();
+        queue.releaseFromQueue();
     }
 }

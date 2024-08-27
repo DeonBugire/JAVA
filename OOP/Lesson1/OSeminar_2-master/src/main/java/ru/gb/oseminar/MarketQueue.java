@@ -3,19 +3,17 @@ package ru.gb.oseminar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MarketQueue {
-    private final List<Actor> queue;
+public class MarketQueue implements QueueBehaviour {
+    private final List<Actor> queue = new ArrayList<>();
 
-    public MarketQueue() {
-        this.queue = new ArrayList<>();
-    }
-
-    public void addActorToQueue(Actor actor) {
+    @Override
+    public void takeInQueue(Actor actor) {
         System.out.println(actor.getName() + " встал в очередь");
-        this.queue.add(actor);
+        queue.add(actor);
     }
 
-    public void processOrders() {
+    @Override
+    public void takeOrders() {
         for (Actor actor : queue) {
             if (!actor.isMakeOrder()) {
                 actor.setMakeOrder(true);
@@ -24,28 +22,29 @@ public class MarketQueue {
         }
     }
 
-    public void deliverOrders() {
+    @Override
+    public void giveOrders() {
         for (Actor actor : queue) {
-            if (actor.isMakeOrder() && !actor.isTakeOrder()) {
+            if (actor.isMakeOrder()) {
                 actor.setTakeOrder(true);
                 System.out.println(actor.getName() + " получил свой заказ");
             }
         }
     }
 
-    public List<Actor> releaseActorsFromQueue() {
+    @Override
+    public void releaseFromQueue() {
         List<Actor> releasedActors = new ArrayList<>();
         for (Actor actor : queue) {
             if (actor.isTakeOrder()) {
                 releasedActors.add(actor);
-                System.out.println(actor.getName() + " вышел из очереди и готов уходить");
+                System.out.println(actor.getName() + " вышел из очереди");
             }
         }
         queue.removeAll(releasedActors);
-        return releasedActors;
     }
 
-    public boolean isQueueEmpty() {
+    public boolean isEmpty() {
         return queue.isEmpty();
     }
 }

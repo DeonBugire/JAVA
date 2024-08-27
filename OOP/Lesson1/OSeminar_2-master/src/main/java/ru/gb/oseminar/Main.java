@@ -4,11 +4,13 @@ public class Main {
     public static void main(String[] args) {
         Market market = new Market();
 
-        Actor john = new Human("Василий");
-        Actor emily = new Human("Дмитрий");
+        Actor actor1 = new Human("Василий");
+        Actor actor2 = new Human("Дмитрий");
+        Actor actor3 = new Human("Аня");
 
-        market.acceptToMarket(john);
-        market.acceptToMarket(emily);
+        market.acceptToMarket(actor1);
+        market.acceptToMarket(actor2);
+        market.acceptToMarket(actor3);
 
         market.update();
     }
